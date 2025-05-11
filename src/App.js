@@ -4,7 +4,7 @@ import html2canvas from 'html2canvas';
 // Function to load predefined terms from a config file
 async function loadTerms() {
     try {
-        const response = await fetch('/config.json');
+        const response = await fetch(`${process.env.PUBLIC_URL}/config.json`);
         if (!response.ok) throw new Error('Failed to load config');
         const data = await response.json();
         return data.predefinedTerms;

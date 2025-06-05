@@ -45,17 +45,17 @@ const BingoSheet = () => {
     loadTerms().then((terms) => {
       setPredefinedTerms(terms || []);
       if (terms && terms.length) {
-        // seed based on today's date (YYYYMMDD)
+                // seed based on today's UTC date (YYYYMMDD)
         const today = new Date();
         const seed = parseInt(
-          today.getFullYear().toString() +
-          String(today.getMonth() + 1).padStart(2, '0') +
-          String(today.getDate()).padStart(2, '0'),
+          today.getUTCFullYear().toString() +
+          String(today.getUTCMonth() + 1).padStart(2, '0') +
+          String(today.getUTCDate()).padStart(2, '0'),
           10
         );
         const randomFn = createSeededRandom(seed);
         const shuffled = shuffleArray(terms, randomFn);
-        setBingoGrid(shuffled.slice(0, 25));
+        setBingoGrid(shuffled.slice(0, 25));(shuffled.slice(0, 25));
       }
     });
   }, []);
@@ -80,7 +80,7 @@ const BingoSheet = () => {
 
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial', textAlign: 'center' }}>
-      <h1 style={{ fontSize: '24px', marginBottom: '10px' }}>Daily Very Bingo</h1>
+      <h1 style={{ fontSize: '24px', marginBottom: '10px' }}>Daily Bingo Sheet</h1>
       <button
         onClick={downloadBingo}
         style={{

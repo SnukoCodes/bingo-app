@@ -44,7 +44,7 @@ const BingoSheet = () => {
   useEffect(() => {
     loadTerms().then((terms) => {
       setPredefinedTerms(terms || []);
-      if (terms && terms.length) {
+        if (terms && terms.length) {
                 // seed based on today's UTC date (YYYYMMDD)
         const today = new Date();
         const seed = parseInt(
@@ -55,7 +55,10 @@ const BingoSheet = () => {
         );
         const randomFn = createSeededRandom(seed);
         const shuffled = shuffleArray(terms, randomFn);
-        setBingoGrid(shuffled.slice(0, 25));(shuffled.slice(0, 25));
+        // select 24 terms and insert a center FREE cell at index 12 (0-based)
+        const selected = shuffled.slice(0, 24);
+        selected.splice(12, 0, 'Other Hero Tangent');
+        setBingoGrid(selected);
       }
     });
   }, []);
